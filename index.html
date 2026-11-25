@@ -389,9 +389,11 @@ tr.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go
 let settle;tr.addEventListener('scroll',()=>{upd();clearTimeout(settle);settle=setTimeout(()=>{tgt=null;recenter()},140)},{passive:true});
 requestAnimationFrame(()=>{tr.scrollLeft=N*step();upd()});
 addEventListener('resize',()=>{tr.scrollLeft=(N+((idx()%N)+N)%N)*step()});
-// 자동 재생: 페이지를 열자마자 2.2초마다 한 칸. 마우스를 올려도 멈추지 않고, 직접 넘기거나 누른 뒤에는 2.2초 쉬었다가 다시 움직임
-let lastTouch=0;['pointerdown','wheel','touchstart','keydown'].forEach(ev=>tr.closest('.band').addEventListener(ev,()=>lastTouch=Date.now(),{passive:true}));
-setInterval(()=>{if(Date.now()-lastTouch>=2200&&!$('#home').hidden&&!document.hidden)go(1)},2200);
+// 자동 재생: 홈페이지에서 화면을 내리기 시작하면 바로 출발, 이후 2.3초마다 한 칸. 마우스를 올려도 멈추지 않고, 직접 넘기거나 누른 뒤에는 2.3초 쉬었다가 다시 움직임
+let lastTouch=0;['pointerdown','touchstart','keydown'].forEach(ev=>tr.closest('.band').addEventListener(ev,()=>lastTouch=Date.now(),{passive:true}));
+const AUTO=2300;const tick=()=>{if(Date.now()-lastTouch>=AUTO&&!$('#home').hidden&&!document.hidden)go(1)};
+let started=false;const startAuto=()=>{if(started)return;started=true;tick();setInterval(tick,AUTO);removeEventListener('scroll',startAuto)};
+addEventListener('scroll',startAuto,{passive:true});
 
 /* five waves */
 $('#five').innerHTML=[['L','LAND','한국이라는 땅에 쌓인 시간'],['E','ESSENTIAL','본질로 남는 것'],['U','UTOPIA','우리가 꿈꾸는 가장 이상적인 형태'],['N','NEW WAVE','새로운 물결'],['G','GOODS','기억으로 남는 것들']].map(([l,t,d])=>`<div><b>${l}</b><span>${t}</span><small class="ko">${d}</small></div>`).join('');
