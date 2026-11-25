@@ -392,7 +392,7 @@ addEventListener('resize',()=>{tr.scrollLeft=(N+((idx()%N)+N)%N)*step()});
 const band=tr.closest('.band');let paused=false;['mouseenter','touchstart','focusin'].forEach(ev=>band.addEventListener(ev,()=>paused=true,{passive:true}));
 ['mouseleave','focusout'].forEach(ev=>band.addEventListener(ev,()=>paused=false));
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-setInterval(()=>{if(!paused&&!reduce&&!$('#home').hidden&&!document.hidden)go(1)},3200);
+setInterval(()=>{if(!paused&&!reduce&&!$('#home').hidden&&!document.hidden)go(1)},2200);
 
 /* five waves */
 $('#five').innerHTML=[['L','LAND','한국이라는 땅에 쌓인 시간'],['E','ESSENTIAL','본질로 남는 것'],['U','UTOPIA','우리가 꿈꾸는 가장 이상적인 형태'],['N','NEW WAVE','새로운 물결'],['G','GOODS','기억으로 남는 것들']].map(([l,t,d])=>`<div><b>${l}</b><span>${t}</span><small class="ko">${d}</small></div>`).join('');
