@@ -60,7 +60,9 @@ img{display:block;max-width:100%}
 .full>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .full>img.sec-logo{position:absolute;inset:18px auto auto 50%;transform:translateX(-50%);width:105px;height:auto;object-fit:contain;z-index:1}
 .cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:#fff;font-size:11px;letter-spacing:.2em;opacity:.8}
-.split{display:grid;grid-template-columns:1fr 1fr;background:var(--nv) url(waves.jpg) center/cover}
+.wavebg{background:var(--nv) url(waves_tile.jpg) center top/100% auto repeat-y}
+.wavebg .waves{background:none}
+.split{display:grid;grid-template-columns:1fr 1fr}
 .split img{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover}
 .split .gap{aspect-ratio:4/5}
 .art{background:#fff}.art img{width:100%;aspect-ratio:1440/900;object-fit:cover}
@@ -243,11 +245,13 @@ summary::after{content:"+";font-weight:300}details[open] summary::after{content:
 
 
 
+ <div class="wavebg">
  <section class="waves" aria-label="The Five Waves">
   <p class="eye">THE FIVE WAVES</p>
   <div class="five" id="five"></div>
  </section>
  <section class="split" aria-label="래시가드"><img src="bg4l.jpg" alt="반팔 래시가드 집업을 입고 앉은 모델"><div class="gap"></div><div class="gap"></div><img src="bg4r.jpg" alt="민소매 래시가드를 입은 모델"></section>
+ </div>
  <section class="art" aria-label="The Form of Nature"><img src="art.jpg" alt="한국의 자연에서 찾은 형태들을 모은 사진 그리드"></section>
  <section class="full" aria-label="마지막">
   <img src="bg5.jpg" alt="안개 낀 산과 호수">
