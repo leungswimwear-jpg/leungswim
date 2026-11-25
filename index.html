@@ -39,6 +39,10 @@ img{display:block;max-width:100%}
 .burger{display:none}
 .mega{position:fixed;top:64px;left:0;right:0;background:#fff;color:var(--nv);border-top:1px solid var(--ln);display:none;padding:36px 32px 44px;grid-template-columns:repeat(3,200px) 1fr;gap:24px;box-shadow:0 20px 40px rgba(0,0,0,.08)}
 .hd nav>div:hover .mega{display:grid}
+.mega{z-index:2}
+.hd:has(nav>div:hover){background:#fff;color:var(--nv);border-bottom:1px solid var(--ln)}
+.hd::after{content:"";position:fixed;inset:64px 0 0;z-index:1;background:rgba(20,22,18,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
+.hd:has(nav>div:hover)::after{opacity:1;visibility:visible}
 .mega h4{margin:0 0 12px;font-size:11px;color:var(--st);font-weight:500;letter-spacing:.08em}
 .mega a{display:block;font-size:14px;padding:4px 0}
 .mega a:hover{text-decoration:underline}
