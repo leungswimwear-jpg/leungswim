@@ -24,7 +24,7 @@ img{display:block;max-width:100%}
 .ko{font-family:"Noto Sans KR",Inter,sans-serif}
 
 /* header */
-.hd{position:fixed;inset:0 0 auto;z-index:50;height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;color:#fff;border-bottom:1px solid transparent;transition:transform .35s,background-color .25s ease,color .25s ease,border-color .25s ease}
+.hd{position:fixed;inset:0 0 auto;z-index:50;height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;color:#fff;border-bottom:1px solid transparent;transition:transform .35s}
 .hd.solid{background:#fff;color:var(--nv);border-bottom:1px solid var(--ln)}
 .hd.hide{transform:translateY(-100%)}
 .hd nav{display:flex;gap:0;margin-left:-14px;font-size:13px}
@@ -38,11 +38,11 @@ img{display:block;max-width:100%}
 .icons button{width:44px;height:44px;display:grid;place-items:center;position:relative}
 .cnt{position:absolute;top:8px;right:6px;font-size:10px;background:var(--kh);color:#fff;border-radius:9px;min-width:16px;height:16px;line-height:16px;text-align:center}
 .burger{display:none}
-.mega{position:fixed;top:64px;left:0;right:0;background:#fff;color:var(--nv);border-top:1px solid var(--ln);display:grid;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease;padding:36px 32px 44px;grid-template-columns:repeat(3,200px) 1fr;gap:24px;box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.mega{position:fixed;top:64px;left:0;right:0;background:#fff;color:var(--nv);border-top:1px solid var(--ln);display:grid;opacity:0;visibility:hidden;pointer-events:none;padding:36px 32px 44px;grid-template-columns:repeat(3,200px) 1fr;gap:24px;box-shadow:0 20px 40px rgba(0,0,0,.08)}
 .hd nav>div:hover .mega{opacity:1;visibility:visible;pointer-events:auto}
 .mega{z-index:2}
 .hd:has(nav>div:hover){background:#fff;color:var(--nv);border-bottom:1px solid var(--ln)}
-.hd::after{content:"";position:fixed;inset:64px 0 0;z-index:1;background:rgba(20,22,18,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
+.hd::after{content:"";position:fixed;inset:64px 0 0;z-index:1;background:rgba(20,22,18,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none}
 .hd:has(nav>div:hover)::after{opacity:1;visibility:visible}
 .mega h4{margin:0 0 12px;font-size:11px;color:var(--st);font-weight:500;letter-spacing:.08em}
 .mega a{display:block;font-size:14px;padding:4px 0}
