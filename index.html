@@ -376,16 +376,21 @@ document.addEventListener('click',e=>{
 });
 
 /* slider */
-const tr=$('#track');tr.innerHTML=P.map(card).join('');
+const tr=$('#track');const N=P.length;
+// 무한 루프: 상품 목록을 3번 이어 붙이고, 가운데 묶음 안에서만 머물도록 몰래 자리를 옮김
+tr.innerHTML=[0,1,2].map(()=>P.map(card).join('')).join('');
 const step=()=>tr.querySelector('.card').offsetWidth+16;
 const idx=()=>Math.round(tr.scrollLeft/step());
-const upd=()=>{const i=Math.min(idx(),P.length-1);$('#sCount').textContent=String(i+1).padStart(2,'0')+' / '+String(P.length).padStart(2,'0');$('#sProg').style.width=((i+1)/P.length*100)+'%'};
-const go=d=>{const max=tr.scrollWidth-tr.clientWidth;let x=tr.scrollLeft+d*step();if(x>max+4)x=0;if(x<-4)x=max;tr.scrollTo({left:x,behavior:'smooth'})};
+const upd=()=>{const i=((idx()%N)+N)%N;$('#sCount').textContent=String(i+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');$('#sProg').style.width=((i+1)/N*100)+'%'};
+const recenter=()=>{const i=idx();if(i<N||i>=2*N){const snap=tr.style.scrollSnapType;tr.style.scrollSnapType='none';tr.scrollLeft+=(i<N?N:-N)*step();tr.style.scrollSnapType=snap}};
+let tgt=null;const go=d=>{tgt=(tgt??idx())+d;tr.scrollTo({left:tgt*step(),behavior:'smooth'})};
 $('#sNext').onclick=()=>go(1);$('#sPrev').onclick=()=>go(-1);
 tr.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
-tr.addEventListener('scroll',upd,{passive:true});upd();
-let paused=false;['mouseenter','touchstart','focusin'].forEach(ev=>tr.addEventListener(ev,()=>paused=true,{passive:true}));
-['mouseleave','focusout'].forEach(ev=>tr.addEventListener(ev,()=>paused=false));
+let settle;tr.addEventListener('scroll',()=>{upd();clearTimeout(settle);settle=setTimeout(()=>{tgt=null;recenter()},140)},{passive:true});
+requestAnimationFrame(()=>{tr.scrollLeft=N*step();upd()});
+addEventListener('resize',()=>{tr.scrollLeft=(N+((idx()%N)+N)%N)*step()});
+const band=tr.closest('.band');let paused=false;['mouseenter','touchstart','focusin'].forEach(ev=>band.addEventListener(ev,()=>paused=true,{passive:true}));
+['mouseleave','focusout'].forEach(ev=>band.addEventListener(ev,()=>paused=false));
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 setInterval(()=>{if(!paused&&!reduce&&!$('#home').hidden&&!document.hidden)go(1)},3200);
 
